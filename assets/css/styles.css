@@ -1,0 +1,444 @@
+/* ==========================================================================
+   1. CSS Variables (Requirement 4.3)
+   ========================================================================== */
+:root {
+    /* Minimalist Color Palette */
+    --bg-color: #fafafa;
+    --surface-color: #ffffff;
+    --text-main: #222222;
+    --text-muted: #666666;
+    --accent-color: #b58b4b; /* Subtle Imperial Gold */
+    --accent-hover: #9c763c;
+    --border-color: #e0e0e0;
+    --error-color: #d9534f;
+    
+    /* Typography & Spacing */
+    --font-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --base-size: 16px; /* Accessibility requirement 4.4: Font >= 16px */
+    --transition-speed: 0.3s;
+}
+
+/* ==========================================================================
+   2. Base Reset & Accessibility (Requirement 4.4)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--base-size);
+    scroll-behavior: smooth; /* Nice touch for anchor links */
+}
+
+body {
+    font-family: var(--font-base);
+    color: var(--text-main);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Reusable Typography classes */
+h1, h2, h3 {
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover, a:focus {
+    color: var(--accent-hover);
+}
+
+/* Accessibility: Visible Focus Rings */
+:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   3. Top Navigation Bar (Flexbox)
+   ========================================================================== */
+header {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* Hide the subtitle in the header to keep it strictly a minimal bar */
+header > p { display: none; }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+/* ==========================================================================
+   4. Main Layout & Reusable Sections
+   ========================================================================== */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 5%;
+    min-height: 70vh; /* Keeps footer at bottom on short pages */
+}
+
+section {
+    margin-bottom: 5rem;
+}
+
+/* Utility Class: Ready for JS Animation later! */
+/* In JS, you just remove this class using an IntersectionObserver */
+.js-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.js-fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Buttons */
+.button, button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+    font-family: var(--font-base);
+}
+
+.button:hover, button:hover {
+    background-color: var(--accent-hover);
+    color: #fff;
+}
+
+/* ==========================================================================
+   5. Components (Grid, Cards, Tables)
+   ========================================================================== */
+/* Image Grid - Requirement 4.3 */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+figure {
+    background: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* Minimal soft shadow */
+}
+
+figure img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+figure:hover img {
+    transform: scale(1.03); /* Subtle zoom effect */
+}
+
+figcaption {
+    padding: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Tour & Attraction Cards */
+.tour-packages, .attractions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.attraction-card, .package {
+    background: var(--surface-color);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: var(--surface-color);
+}
+
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+th { background-color: #f4f4f4; font-weight: 600; }
+
+/* ==========================================================================
+   6. Complex Form Styling (Requirement 4.2)
+   ========================================================================== */
+form {
+    background: var(--surface-color);
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+fieldset {
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 6px;
+}
+
+legend {
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0 1rem;
+    color: var(--accent-color);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+/* Style standard text-based inputs */
+input[type="text"], input[type="email"], input[type="tel"], 
+input[type="password"], input[type="date"], input[type="number"], 
+select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--bg-color);
+    transition: border-color var(--transition-speed);
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color);
+}
+
+/* Inline Checkboxes and Radios */
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: var(--accent-color);
+}
+
+input[type="radio"] + label, input[type="checkbox"] + label {
+    display: inline-block; /* puts them next to the input */
+    font-weight: normal;
+    margin-bottom: 1rem;
+    margin-right: 1.5rem;
+}
+
+/* Range Slider */
+input[type="range"] {
+    width: 100%;
+    margin-bottom: 2rem;
+    accent-color: var(--accent-color);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+button[type="reset"] {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+button[type="reset"]:hover {
+    background-color: var(--bg-color);
+    color: var(--error-color);
+    border-color: var(--error-color);
+}
+
+/* Form Validation Messages */
+input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--error-color);
+}
+
+/* ==========================================================================
+   7. Footer
+   ========================================================================== */
+footer {
+    text-align: center;
+    padding: 3rem 5%;
+    border-top: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+nav a.active {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.js-fade-in:nth-child(2) {
+    transition-delay: 0.2s;
+}
+.js-fade-in:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+/* ==========================================================================
+   Hamburger Menu Fix - Destroys the brown block on desktop!
+   ========================================================================== */
+header button.hamburger {
+    display: none; /* Hides it completely on laptop/desktop screens */
+    background-color: transparent !important; /* Forces the brown block to disappear */
+    padding: 0 !important; /* Removes the thick button padding */
+    border: none;
+    cursor: pointer;
+}
+
+header button.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-main); /* Makes the 3 dashes dark grey */
+    transition: all 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   8. Responsive Design (Breakpoint ~768px) - Drop-Down Menu
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 1rem 5%;
+        position: relative; /* Crucial so the dropdown attaches to the header */
+        background-color: var(--surface-color); /* Solid background */
+        /* Note: We removed flex-direction: column so the logo and hamburger sit side-by-side! */
+    }
+
+    header h1 {
+        font-size: 1.2rem;
+        margin-bottom: 0; /* Ensures the logo doesn't push the hamburger down */
+        z-index: 1002; /* Keep logo above dropdown */
+    }
+
+    /* Show the hamburger button */
+    /* Show the hamburger button ONLY on mobile */
+     header button.hamburger {
+        display: block;
+        z-index: 1002; 
+        margin-left: auto; /* THIS MAGIC LINE PUSHES IT TO THE RIGHT EDGE! */
+    }
+
+    /* --- THE DROP-DOWN MENU --- */
+    nav ul {
+        position: absolute;
+        top: 100%; /* Puts it directly below the header */
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--surface-color);
+        text-align: center;
+        gap: 0;
+        padding: 0;
+        z-index: 1001;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        
+        /* Hidden State: Collapsed height and invisible */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    }
+
+    /* Active State: Expanded height and visible (Triggered by JS) */
+    nav ul.active-menu {
+        max-height: 500px; /* A safe height to fit all your links */
+        opacity: 1;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    /* Style the links for mobile tapping */
+    nav ul li a {
+        display: block;
+        padding: 1.2rem;
+        border-top: 1px solid var(--border-color); /* Adds lines between links */
+        font-size: 1.1rem;
+    }
+
+    /* Animate the 3 dashes into an 'X' */
+    .hamburger.toggle .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.toggle .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.toggle .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* General Mobile Layout Adjustments */
+    main { padding: 2rem 5%; }
+    form { padding: 1.5rem; }
+    fieldset { padding: 1rem; }
+    .form-actions { flex-direction: column; }
+    
+    /* Make image grid 1 column on small phones */
+    .image-grid { grid-template-columns: 1fr; }
+}

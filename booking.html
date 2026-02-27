@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Tour | Hue Citadel</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <main>
+        <section class="booking-section js-fade-in">
+            <h2>Book Your Royal Experience</h2>
+            <p>Fill out the form below to secure your tickets and guided tours.</p>
+            <form action="#" method="POST">
+                <input type="hidden" name="booking_source" value="website">
+
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <label for="fname">Full Name:</label>
+                    <input type="text" id="fname" name="fname" required placeholder="Nguyen Van A">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10,11}" placeholder="0901234567" required>
+                    <label for="acct_pass">Create Account Password (Optional):</label>
+                    <input type="password" id="acct_pass" name="acct_pass" minlength="8">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Tour Details</legend>
+                    <label for="visit_date">Date of Visit:</label>
+                    <input type="date" id="visit_date" name="visit_date" required>
+                    <label for="guests">Number of Guests:</label>
+                    <input type="number" id="guests" name="guests" min="1" max="20" step="1" value="1" required>
+                    <label for="country">Country of Origin:</label>
+                    <input list="countries" id="country" name="country" placeholder="Type to search...">
+                    <datalist id="countries">
+                        <option value="Vietnam">
+                        <option value="USA">
+                        <option value="Japan">
+                        <option value="France">
+                        <option value="Australia">
+                    </datalist>
+
+                    <label for="tour_package">Select Tour Package:</label>
+                    <select id="tour_package" name="tour_package" required>
+                        <option value="">--Please choose an option--</option>
+                        <optgroup label="Standard Tours">
+                            <option value="entry">Entry Ticket Only</option>
+                            <option value="half_day">Half-Day Citadel Walking Tour</option>
+                        </optgroup>
+                        <optgroup label="Premium Tours">
+                            <option value="full_day">Full-Day Citadel & Tombs</option>
+                            <option value="royal">Royal Night Experience</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Preferences & Add-ons</legend>
+
+                    <p>Do you need an English-speaking guide?</p>
+                    <input type="radio" id="guide_yes" name="guide" value="yes" checked>
+                    <label for="guide_yes">Yes</label>
+                    <input type="radio" id="guide_no" name="guide" value="no">
+                    <label for="guide_no">No</label>
+
+                    <p>Select Add-ons:</p>
+                    <input type="checkbox" id="music" name="addons" value="royal_music">
+                    <label for="music">Royal Court Music Performance</label><br>
+                    <input type="checkbox" id="cart" name="addons" value="electric_cart">
+                    <label for="cart">Electric Cart Service inside Citadel</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Extras & Special Requests</legend>
+                    <label for="duration">Expected Duration (Hours):</label>
+                    <input type="range" id="duration" name="duration" min="1" max="8" value="3">
+                    <label for="badge_color">Pick your group's VIP Badge Color:</label>
+                    <input type="color" id="badge_color" name="badge_color" value="#ffcc00">
+                    <label for="student_id">Upload Student ID for Discount (PDF/JPG):</label>
+                    <input type="file" id="student_id" name="student_id" accept=".pdf, .jpg, .jpeg, .png">
+                    <label for="requests">Special Requests/Allergies:</label>
+                    <textarea id="requests" name="requests" rows="4" placeholder="Let us know how we can help..."></textarea>
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit">Book Now</button>
+                    <button type="reset">Clear Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
