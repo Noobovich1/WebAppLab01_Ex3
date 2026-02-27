@@ -76,8 +76,8 @@
 
                 <fieldset>
                     <legend>Extras & Special Requests</legend>
-                    <label for="duration">Expected Duration (Hours):</label>
-                    <input type="range" id="duration" name="duration" min="1" max="8" value="3">
+                    <label for="duration">Expected Duration: <output id="duration_val" class="range-output">3</output> Hours</label>
+                    <input type="range" id="duration" name="duration" min="1" max="7" value="3" oninput="document.getElementById('duration_val').value = this.value">
                     <label for="badge_color">Pick your group's VIP Badge Color:</label>
                     <input type="color" id="badge_color" name="badge_color" value="#ffcc00">
                     <label for="student_id">Upload Student ID for Discount (PDF/JPG):</label>

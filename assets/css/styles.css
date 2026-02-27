@@ -38,37 +38,28 @@ body, header, footer, form, fieldset, .attraction-card, .package, figure, nav ul
     justify-content: center;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover{
     transform: scale(1.1);
 }
 
-header {
+header{
     background-color: var(--surface-color) !important;
 }
 
-li.theme-li {
+li.theme-li{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 1rem;
 }
 
-button#theme-toggle {
+button#theme-toggle{
     background: transparent;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--text-main);
     padding: 0;
-}
-
-@media screen and (max-width: 768px) {
-    li.theme-li {
-        margin-left: 0;
-        padding: 1.2rem;
-        border-top: 1px solid var(--border-color);
-        background-color: var(--bg-color);
-    }
 }
 
 .header-controls{
@@ -164,6 +155,18 @@ nav a:hover{
     color: var(--accent-color);
 }
 
+header nav ul{
+    align-items: center; 
+}
+
+button#theme-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    margin-top: -2px;
+}
+
 main{
     width: 90%;
     max-width: 1200px;
@@ -223,6 +226,28 @@ section{
     color: var(--accent-color);
     margin-top: 1rem;
     font-style: normal;
+}
+
+.attraction-card{
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.attraction-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.attraction-card img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 4px solid var(--accent-color);
+}
+
+.attraction-card .card-content{
+    padding: 1.5rem;
 }
 
 .drop-cap::first-letter{
@@ -343,6 +368,13 @@ select, textarea{
     transition: border-color var(--transition-speed), background-color 0.4s ease, color 0.4s ease;
 }
 
+.range-output {
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0 0.2rem;
+}
+
 input:focus, select:focus, textarea:focus {
     border-color: var(--accent-color);
     outline: none;
@@ -455,6 +487,13 @@ header button.hamburger .bar {
 }
 
 @media screen and (max-width: 768px) {
+    li.theme-li{
+        margin-left: 0;
+        padding: 1.2rem;
+        border-top: 1px solid var(--border-color);
+        background-color: var(--bg-color);
+    }
+
     header{
         padding: 1rem 5%;
         position: relative;
@@ -492,7 +531,7 @@ header button.hamburger .bar {
     }
 
     nav ul.active-menu{
-        max-height: 500px;
+        max-height: 600px;
         opacity: 1;
     }
 
