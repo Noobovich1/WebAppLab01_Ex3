@@ -1,38 +1,97 @@
-/* ==========================================================================
-   1. CSS Variables (Requirement 4.3)
-   ========================================================================== */
-:root {
-    /* Minimalist Color Palette */
+:root{
     --bg-color: #fafafa;
     --surface-color: #ffffff;
     --text-main: #222222;
     --text-muted: #666666;
-    --accent-color: #b58b4b; /* Subtle Imperial Gold */
+    --accent-color: #b58b4b; 
     --accent-hover: #9c763c;
     --border-color: #e0e0e0;
     --error-color: #d9534f;
-    
-    /* Typography & Spacing */
-    --font-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --base-size: 16px; /* Accessibility requirement 4.4: Font >= 16px */
+    --font-base: 'Inter', -apple-system, sans-serif;
     --transition-speed: 0.3s;
 }
 
-/* ==========================================================================
-   2. Base Reset & Accessibility (Requirement 4.4)
-   ========================================================================== */
-* {
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-main: #f5f5f5;
+    --text-muted: #b3b3b3;
+    --border-color: #333333;
+    --accent-color: #d4af37;
+    --accent-hover: #b58b4b;
+}
+
+body, header, footer, form, fieldset, .attraction-card, .package, figure, nav ul, table, th, td {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+.theme-toggle{
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    color: var(--text-main);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+header {
+    background-color: var(--surface-color) !important;
+}
+
+li.theme-li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+button#theme-toggle {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-main);
+    padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+    li.theme-li {
+        margin-left: 0;
+        padding: 1.2rem;
+        border-top: 1px solid var(--border-color);
+        background-color: var(--bg-color);
+    }
+}
+
+.header-controls{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+    z-index: 1002;
+}
+
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html {
-    font-size: var(--base-size);
-    scroll-behavior: smooth; /* Nice touch for anchor links */
+html{
+    font-size: clamp(16px, 1.2vw + 10px, 18px);
+    scroll-behavior: smooth;
+    overflow-x: hidden; 
 }
 
-body {
+body{
     font-family: var(--font-base);
     color: var(--text-main);
     background-color: var(--bg-color);
@@ -40,8 +99,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Reusable Typography classes */
-h1, h2, h3 {
+h1, h2, h3{
     font-weight: 500;
     line-height: 1.2;
     margin-top: 1rem;
@@ -49,32 +107,28 @@ h1, h2, h3 {
     color: var(--text-main);
 }
 
-p {
+p{
     margin-bottom: 1.5rem;
     color: var(--text-muted);
 }
 
-a {
+a{
     color: var(--accent-color);
     text-decoration: none;
     transition: color var(--transition-speed) ease;
 }
 
-a:hover, a:focus {
+a:hover, a:focus{
     color: var(--accent-hover);
 }
 
-/* Accessibility: Visible Focus Rings */
-:focus {
+:focus{
     outline: 2px solid var(--accent-color);
     outline-offset: 3px;
 }
 
-/* ==========================================================================
-   3. Top Navigation Bar (Flexbox)
-   ========================================================================== */
-header {
-    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent */
+header{
+    background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
@@ -86,59 +140,53 @@ header {
     padding: 1.2rem 5%;
 }
 
-header h1 {
+header h1{
     font-size: 1.5rem;
     margin: 0;
     letter-spacing: -0.5px;
 }
 
-/* Hide the subtitle in the header to keep it strictly a minimal bar */
-header > p { display: none; }
+header > p {display: none;}
 
-nav ul {
+nav ul{
     list-style: none;
     display: flex;
     gap: 2rem;
 }
 
-nav a {
+nav a{
     color: var(--text-main);
     font-weight: 500;
     font-size: 0.95rem;
 }
 
-nav a:hover {
+nav a:hover{
     color: var(--accent-color);
 }
 
-/* ==========================================================================
-   4. Main Layout & Reusable Sections
-   ========================================================================== */
-main {
-    max-width: 1100px;
+main{
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 5%;
-    min-height: 70vh; /* Keeps footer at bottom on short pages */
+    padding: 4rem 0;
+    min-height: 70vh;
 }
 
-section {
+section{
     margin-bottom: 5rem;
 }
 
-/* Utility Class: Ready for JS Animation later! */
-/* In JS, you just remove this class using an IntersectionObserver */
-.js-fade-in {
+.js-fade-in{
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-.js-fade-in.is-visible {
+.js-fade-in.is-visible{
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Buttons */
-.button, button {
+.button, button{
     display: inline-block;
     background-color: var(--accent-color);
     color: #fff;
@@ -151,29 +199,56 @@ section {
     font-family: var(--font-base);
 }
 
-.button:hover, button:hover {
+.button:hover, button:hover{
     background-color: var(--accent-hover);
     color: #fff;
 }
 
-/* ==========================================================================
-   5. Components (Grid, Cards, Tables)
-   ========================================================================== */
-/* Image Grid - Requirement 4.3 */
-.image-grid {
+.historical-quote{
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-main);
+    background-color: var(--surface-color);
+    padding: 2rem;
+    margin: 3rem 0;
+    border-left: 5px solid var(--accent-color);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.historical-quote cite{
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-top: 1rem;
+    font-style: normal;
+}
+
+.drop-cap::first-letter{
+    font-size: 4rem;
+    font-weight: 854;
+    font-style: italic;
+    float: left;
+    line-height: 1;
+    margin-right: 1rem;
+    color: var(--accent-color);
+}
+
+.image-grid{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
 }
 
-figure {
+figure{
     background: var(--surface-color);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* Minimal soft shadow */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
 }
 
-figure img {
+figure img{
     width: 100%;
     height: 250px;
     object-fit: cover;
@@ -182,80 +257,110 @@ figure img {
 }
 
 figure:hover img {
-    transform: scale(1.03); /* Subtle zoom effect */
+    transform: scale(1.03);
 }
 
-figcaption {
+figcaption{
     padding: 1rem;
     font-size: 0.9rem;
     text-align: center;
     border-top: 1px solid var(--border-color);
 }
 
-/* Tour & Attraction Cards */
 .tour-packages, .attractions-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
-.attraction-card, .package {
+.attraction-card, .package{
     background: var(--surface-color);
     padding: 2rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
 }
 
-table {
+table{
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
     background: var(--surface-color);
 }
 
-th, td {
+th, td{
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
     text-align: left;
 }
 
-th { background-color: #f4f4f4; font-weight: 600; }
+th{
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-color);
+}
 
-/* ==========================================================================
-   6. Complex Form Styling (Requirement 4.2)
-   ========================================================================== */
-form {
+form{
     background: var(--surface-color);
     padding: 3rem;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.03);
 }
 
-fieldset {
+fieldset{
     border: 1px solid var(--border-color);
     padding: 2rem;
     margin-bottom: 2.5rem;
     border-radius: 6px;
 }
 
-legend {
+legend{
     font-weight: 600;
     font-size: 1.1rem;
     padding: 0 1rem;
     color: var(--accent-color);
 }
 
-label {
+label{
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--text-main);
 }
 
-/* Style standard text-based inputs */
 input[type="text"], input[type="email"], input[type="tel"], 
 input[type="password"], input[type="date"], input[type="number"], 
-select, textarea {
+select, textarea{
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-main); 
+    background-color: var(--bg-color);
+    transition: border-color var(--transition-speed), background-color 0.4s ease, color 0.4s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+input::placeholder, textarea::placeholder{
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+::-webkit-calendar-picker-indicator{
+    filter: var(--icon-filter, none);
+}
+[data-theme="dark"]{
+    --icon-filter: invert(1);
+}
+
+select, textarea{
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 1.5rem;
@@ -271,53 +376,47 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--accent-color);
 }
 
-/* Inline Checkboxes and Radios */
 input[type="radio"], input[type="checkbox"] {
     margin-right: 0.5rem;
     accent-color: var(--accent-color);
 }
 
 input[type="radio"] + label, input[type="checkbox"] + label {
-    display: inline-block; /* puts them next to the input */
+    display: inline-block;
     font-weight: normal;
     margin-bottom: 1rem;
     margin-right: 1.5rem;
 }
 
-/* Range Slider */
-input[type="range"] {
+input[type="range"]{
     width: 100%;
     margin-bottom: 2rem;
     accent-color: var(--accent-color);
 }
 
-.form-actions {
+.form-actions{
     display: flex;
     gap: 1rem;
     margin-top: 2rem;
 }
 
-button[type="reset"] {
+button[type="reset"]{
     background-color: transparent;
     color: var(--text-muted);
     border: 1px solid var(--border-color);
 }
 
-button[type="reset"]:hover {
+button[type="reset"]:hover{
     background-color: var(--bg-color);
     color: var(--error-color);
     border-color: var(--error-color);
 }
 
-/* Form Validation Messages */
-input:invalid:not(:focus):not(:placeholder-shown) {
+input:invalid:not(:focus):not(:placeholder-shown){
     border-color: var(--error-color);
 }
 
-/* ==========================================================================
-   7. Footer
-   ========================================================================== */
-footer {
+footer{
     text-align: center;
     padding: 3rem 5%;
     border-top: 1px solid var(--border-color);
@@ -326,25 +425,22 @@ footer {
     font-size: 0.9rem;
 }
 
-nav a.active {
+nav a.active{
     color: var(--accent-color);
     font-weight: 700;
 }
 
-.js-fade-in:nth-child(2) {
+.js-fade-in:nth-child(2){
     transition-delay: 0.2s;
 }
-.js-fade-in:nth-child(3) {
+.js-fade-in:nth-child(3){
     transition-delay: 0.4s;
 }
 
-/* ==========================================================================
-   Hamburger Menu Fix - Destroys the brown block on desktop!
-   ========================================================================== */
 header button.hamburger {
-    display: none; /* Hides it completely on laptop/desktop screens */
-    background-color: transparent !important; /* Forces the brown block to disappear */
-    padding: 0 !important; /* Removes the thick button padding */
+    display: none;
+    background-color: transparent !important;
+    padding: 0 !important;
     border: none;
     cursor: pointer;
 }
@@ -354,39 +450,32 @@ header button.hamburger .bar {
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: var(--text-main); /* Makes the 3 dashes dark grey */
+    background-color: var(--text-main);
     transition: all 0.3s ease-in-out;
 }
 
-/* ==========================================================================
-   8. Responsive Design (Breakpoint ~768px) - Drop-Down Menu
-   ========================================================================== */
 @media screen and (max-width: 768px) {
-    header {
+    header{
         padding: 1rem 5%;
-        position: relative; /* Crucial so the dropdown attaches to the header */
-        background-color: var(--surface-color); /* Solid background */
-        /* Note: We removed flex-direction: column so the logo and hamburger sit side-by-side! */
+        position: relative;
+        background-color: var(--surface-color);
     }
 
-    header h1 {
+    header h1{
         font-size: 1.2rem;
-        margin-bottom: 0; /* Ensures the logo doesn't push the hamburger down */
-        z-index: 1002; /* Keep logo above dropdown */
+        margin-bottom: 0;
+        z-index: 1002;
     }
 
-    /* Show the hamburger button */
-    /* Show the hamburger button ONLY on mobile */
-     header button.hamburger {
+     header button.hamburger{
         display: block;
         z-index: 1002; 
-        margin-left: auto; /* THIS MAGIC LINE PUSHES IT TO THE RIGHT EDGE! */
+        margin-left: auto;
     }
 
-    /* --- THE DROP-DOWN MENU --- */
-    nav ul {
+    nav ul{
         position: absolute;
-        top: 100%; /* Puts it directly below the header */
+        top: 100%;
         left: 0;
         width: 100%;
         flex-direction: column;
@@ -396,49 +485,74 @@ header button.hamburger .bar {
         padding: 0;
         z-index: 1001;
         box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-        
-        /* Hidden State: Collapsed height and invisible */
         max-height: 0;
         overflow: hidden;
         opacity: 0;
         transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
     }
 
-    /* Active State: Expanded height and visible (Triggered by JS) */
-    nav ul.active-menu {
-        max-height: 500px; /* A safe height to fit all your links */
+    nav ul.active-menu{
+        max-height: 500px;
         opacity: 1;
     }
 
-    nav ul li {
+    nav ul li{
         width: 100%;
     }
 
-    /* Style the links for mobile tapping */
-    nav ul li a {
+    nav ul li a{
         display: block;
         padding: 1.2rem;
-        border-top: 1px solid var(--border-color); /* Adds lines between links */
+        border-top: 1px solid var(--border-color);
         font-size: 1.1rem;
     }
 
-    /* Animate the 3 dashes into an 'X' */
-    .hamburger.toggle .bar:nth-child(1) {
+    .hamburger.toggle .bar:nth-child(1){
         transform: translateY(8px) rotate(45deg);
     }
-    .hamburger.toggle .bar:nth-child(2) {
+    .hamburger.toggle .bar:nth-child(2){
         opacity: 0;
     }
-    .hamburger.toggle .bar:nth-child(3) {
+    .hamburger.toggle .bar:nth-child(3){
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* General Mobile Layout Adjustments */
-    main { padding: 2rem 5%; }
-    form { padding: 1.5rem; }
-    fieldset { padding: 1rem; }
-    .form-actions { flex-direction: column; }
-    
-    /* Make image grid 1 column on small phones */
-    .image-grid { grid-template-columns: 1fr; }
+    main{ 
+        padding: 2rem 5%; 
+    }
+    form{ 
+        padding: 1.5rem; 
+    }
+    fieldset{ 
+        padding: 1rem; 
+    }
+    .form-actions{ 
+        flex-direction: column; 
+    }
+    .image-grid{ 
+        grid-template-columns: 1fr; 
+    }
+}
+
+.video-container{
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.video-container iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border-radius: 8px;
+    border: none;
 }
