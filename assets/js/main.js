@@ -54,8 +54,8 @@ function loadNavigation() {
 function loadFooter() {
     const footerHTML = `
         <footer>
-            <p>&copy; 2026 Hue Citadel Tours. Designed for academic project purposes.</p>
-            <p>Contact: <a href="mailto:info@huecitadeltours.com">info@huecitadeltours.com</a></p>
+            <p>&copy; 2026 Hue Citadel Tours. Designed for WebApp exercise submission.</p>
+            <p>Contact: <a href="https://github.com/Noobovich1">My Github</a></p>
         </footer>
     `;
     document.body.insertAdjacentHTML('beforeend', footerHTML);
