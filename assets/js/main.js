@@ -104,11 +104,65 @@ function initThemeToggle(){
     });
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{
+function initFormValidation() {
+    const form = document.getElementById('booking-form');
+    if (!form) return;
+
+    const alertBox = document.getElementById('form-alerts');
+    form.addEventListener('input', function(e) {
+        alertBox.className = 'alert';
+        alertBox.innerHTML = '';
+        if (e.target.classList.contains('input-error')) {
+            e.target.classList.remove('input-error');
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nameRegex = /^[a-zA-ZÀ-ỹ\s]{3,50}$/; 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^0[0-9]{9}$/;
+        const nameInput = document.getElementById('fname');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+
+        let errors = [];
+        if (!nameRegex.test(nameInput.value.trim())){
+            errors.push("Full Name must be 3-50 characters and contain only letters");
+            nameInput.classList.add('input-error');
+        }
+
+        if (!emailRegex.test(emailInput.value.trim())){
+            errors.push("Please enter a valid email address");
+            emailInput.classList.add('input-error');
+        }
+
+        if (!phoneRegex.test(phoneInput.value.trim())){
+            errors.push("Phone number must be exactly 10 digits starting with 0");
+            phoneInput.classList.add('input-error');
+        }
+
+        if (errors.length > 0){
+            alertBox.className = 'alert error';
+            alertBox.innerHTML = `<strong>Registration Failed:</strong> Please fix the following errors:
+                                  <ul>${errors.map(err => `<li>${err}</li>`).join('')}</ul>`;
+            alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            alertBox.className = 'alert success';
+            alertBox.innerHTML = `<strong>Success!</strong> Your royal tour has been booked perfectly. We have sent a confirmation to ${emailInput.value}.`;
+            form.reset();
+            document.getElementById('duration_val').textContent = '3';
+            alertBox.scrollIntoView({behavior: 'smooth', block: 'center'});
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
     loadNavigation();
     loadFooter(); 
     initThemeToggle();
-    setTimeout(() =>{
+    initFormValidation(); 
+    setTimeout(() => {
         initScrollAnimations();
     }, 100);
 });
