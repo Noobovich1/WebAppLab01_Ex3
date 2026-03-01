@@ -21,3 +21,5 @@ This project consists of [7] HTML pages:
 *   **Images:** Google image searches
 *   **Video:** https://www.youtube.com/watch?v=t7677a4Rxnw
 *   **Map:** Google Maps Embed.
+  
+## Deployment: https://noobovich1.github.io/WebAppLab01_Ex3/
