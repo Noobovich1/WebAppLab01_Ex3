@@ -12,12 +12,12 @@ This project consists of [7] HTML pages:
 6. **map.html**
 7. **booking.html**
 
-## 🚀 How to Run Locally
+## How to Run Locally
 1.  Download or Clone this repository.
 2.  Open `index.html` in any web browser (Recommend using live server extension).
 3.  *Note:* To test the Dark Mode persistence, ensure cookies/local storage are enabled.
 
-## 📸 Credits
+## Credits
 *   **Images:** Google image searches
 *   **Video:** https://www.youtube.com/watch?v=t7677a4Rxnw
 *   **Map:** Google Maps Embed.

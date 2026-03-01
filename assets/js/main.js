@@ -30,7 +30,7 @@ function loadNavigation(){
     if (currentPage === '') currentPage = 'index.html'; 
 
     const navLinks = document.querySelectorAll('#nav-list a');
-    navLinks.forEach(link => {
+    navLinks.forEach(link =>{
         if (link.getAttribute('href') === currentPage){
             link.classList.add('active');
         }
@@ -84,7 +84,7 @@ function initThemeToggle(){
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)){
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggleBtn.textContent = '☀️';
     }
@@ -104,7 +104,7 @@ function initThemeToggle(){
     });
 }
 
-function initFormValidation() {
+function initFormValidation(){
     const form = document.getElementById('booking-form');
     if (!form) return;
 
@@ -117,7 +117,7 @@ function initFormValidation() {
         }
     });
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function(e){
         e.preventDefault();
         const nameRegex = /^[a-zA-ZÀ-ỹ\s]{3,50}$/; 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
